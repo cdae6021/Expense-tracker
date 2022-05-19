@@ -1,15 +1,10 @@
-const mongoose = require('mongoose') // 載入 mongoose
-
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
-
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
-
 db.on('error', () => {
-    console.log('mongoDB error!')
+  console.log('mongodb error!')
 })
-
 db.once('open', () => {
-    console.log('mongoDB connected!')
+  console.log('mongodb connected!')
 })
-
 module.exports = db
