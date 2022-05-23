@@ -5,30 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css" />
     <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/37dd6d0e3c.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <header>
+  <header>
     <!-- navigation -->
-    <div class="banner bg-dark text-light text-center p-2">家庭記帳本</div>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand font-weight-bolder" href="/">
-          {{#if isAuthenticated}}{{user.name}}'s {{/if}}
-          家庭記帳本
+        <a class="navbar-brand" href="/">
+        {{#if user}}{{user.name}}的{{/if}}家庭記帳本
         </a>
-        {{#if isAuthenticated}}
-        <a href="/users/logout" class="btn btn-outline-secondary">登出</a>
-        {{else}}
-        <a href="/users/login" class="btn btn-outline-secondary">登入</a>
-        {{/if}}
-      </div>
+        <div class="d-flex">
+          {{#if user}}
+          <a href="/users/logout" class="btn btn-outline-light">登出</a>
+          {{else}}
+          <a href="/users/login" class="btn btn-outline-light">登入</a>
+          {{/if}}
+        </div>
     </nav>
+    <div class="banner"></div>
   </header>
 
+  <section class="expense-container  mt-5">
     {{{ body }}}
+  </section>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

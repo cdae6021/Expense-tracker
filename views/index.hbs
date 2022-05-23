@@ -1,53 +1,59 @@
-<div class="col-4 my-4 mx-auto">
-  <form action="/" method = "post">
-<select class="form-select" name="sort" aria-label="Default select example" onchange="this.form.submit()">
-  <option value="類別">類別</option>
-  <option value="全部">全部</option>
-  <option value="居家物業">居家物業</option>
-  <option value="交通出行">交通出行</option>
-  <option value="休閒娛樂">休閒娛樂</option>
-  <option value="餐飲食品">餐飲食品</option>
-  <option value="其他">其他</option>
-</select>
-</form>
-</div>
 
-<div class="col-4 my-2 mx-auto">
+ <!-- totalAmount -->
+<div class="col-3 mx-auto">
   <p class="d-flex justify-content-around">
-    <span class="text-secondary text-body align-top" style="font-size:20px;">
+    <span class="text-muted" style="font-size:20px;">
       總金額：
     </span>
-    <span class="text-secondary text-warning" style="font-size:40px;">
-      {{totalAmount}}
+    <span class="text-warning" style="font-size:50px;">
+      ${{totalAmount}}元
     </span>
   </p>
 </div>
 
-<ul class="list-group w-50 m-auto">
+ <!-- sort bar -->
+<div class="col-6 my-2 mx-auto">
+  <div class="d-flex justify-content-end">
+  <form action="/sort" method = "POST">
+        <select class="form-select" name="sort" aria-label="Default select example" onchange="this.form.submit()">
+          <option value="{{sort}}" >{{sort}}</option>
+          <option value="全部" >全部</option>
+          <option value="家居物業">家居物業</option>
+          <option value="交通出行">交通出行</option>
+          <option value="休閒娛樂">休閒娛樂</option>
+          <option value="餐飲食品">餐飲食品</option>
+          <option value="其他">其他</option>
+       </select>
+  </div>
+</div>
+
+
+<!-- records -->
+<ul class="list-group w-50 mx-auto">
   {{#each records}}
   <li class="list-group-item">
     <div class="row">
-      <div class="col-auto my-auto px-1">
-        <i class="{{this.categoryIcon}} fa-2x text-primary"></i>
+      <div class="col-auto my-auto px-3">
+        <i class="{{this.categoryId.icon}} fa-2x text-muted"></i>
       </div>
       <div class="col-auto mr-auto px-0">
-        <h4 style="display: inline; vertical-align: middle;">
+        <h4 class="text-dark"  style="display: inline; vertical-align: middle;">
           {{this.name}}
         </h4>
-        <p class="mb-1">
+        <p class="mb-1 text-muted">
           {{this.date}}
         </p>
       </div>
       <div class="col-auto my-auto">
-        <span style="display: inline; vertical-align: middle; font-size:20px;">
-          {{this.amount}}
+        <span class="text-muted" style="display: inline; vertical-align: middle; font-size:20px;">
+          ${{this.amount}}元
         </span>
       </div>
       <div class="col-auto my-auto">
-        <a class="btn btn-success" href="./edit/{{ this._id }}">修改</a>
-        <form action="./edit/delete/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;"
-          onsubmit="return confirm('確定要刪除嗎?')">
-          <button class="btn btn-danger" type="submit">刪除</button>
+        <a class="btn btn-outline-success" href="./records/edit/{{ this._id }}">修改</a>
+        <form action="./records/delete/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;"
+          onsubmit="return confirm('確定要刪除嗎?')" id="delete">
+          <button class="btn btn-outline-danger" type="submit" form="delete">刪除</button>
         </form>
       </div>
     </div>
@@ -55,6 +61,9 @@
   {{/each}}
 </ul>
 
+
+
+<!-- create btn -->
 <div class="col-4 my-5 mx-auto text-center">
-  <a href="/create" class="btn btn-warning text-muted font-weight-bolder btn-lg">新增支出</a>
+  <a href="/records/create" class="btn btn-warning text-muted font-weight-bolder btn-lg">新增支出</a>
 </div>

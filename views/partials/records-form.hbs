@@ -1,0 +1,36 @@
+<div class="row g-4 align-items-center mt-0 m-3">
+  <div class="col-4">
+    <label for="name" class="col-form-label">名稱 <span style="color: #e83e8c;">*</span></label>
+  </div>
+  <div class="col-8">
+    <input type="text" id="name" name="name" class="form-control" value="{{ record.name }}">
+  </div>
+  <div class="col-4">
+    <label for="date" class="col-form-label">日期 <span style="color: #e83e8c;">*</span></label>
+  </div>
+  <div class="col-8">
+    <input type="date" id="date" name="date" class="form-control" value="{{ record.date }}">
+  </div>
+  <div class="col-4">
+    <label for="category" class="col-form-label">類別 <span style="color: #e83e8c;">*</span></label>
+  </div>
+  <div class="col-8">
+    <select class="form-control" name="categoryId" id="category">
+      <option {{#if record}} selected disabled {{/if}}>請選擇類別</option>
+      {{#each categories}}
+      {{#if ../record}}
+      <option value="{{ this._id }}" {{#compareObjectID this ../record }} selected {{/compareObjectID}}>{{ this.name }}
+      </option>
+      {{else}}
+      <option value="{{ this._id }}">{{ this.name }}</option>
+      {{/if}}
+      {{/each}}
+    </select>
+  </div>
+  <div class="col-4">
+    <label for="amount" class="col-form-label">金額 <span style="color: #e83e8c;">*</span></label>
+  </div>
+  <div class="col-8">
+    <input type="number" id="amount" name="amount" class="form-control" min="1" value="{{ record.amount }}">
+  </div>
+</div>
