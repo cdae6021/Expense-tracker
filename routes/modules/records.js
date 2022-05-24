@@ -2,8 +2,9 @@ const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
-const record = require('../../models/record')
 
+
+//瀏覽新增頁面
 router.get('/create', (req, res) => {
      Category.find({})
        .lean()
@@ -16,6 +17,7 @@ router.get('/create', (req, res) => {
        })
    })
 
+//瀏覽編輯頁面
 router.get('/edit/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
@@ -34,6 +36,7 @@ router.get('/edit/:id', (req, res) => {
     })
 })
 
+//發送編輯請求
 router.put('/edit/:id',(req, res) => {
   const userId = req.user._id
   const _id = req.params.id
@@ -52,9 +55,28 @@ router.put('/edit/:id',(req, res) => {
   })
 })
 
+//發送新增請求
 router.post('/create', (req, res) => {
      const userId = req.user._id
      const {name, date, categoryId, amount} = req.body
+     let errors = []
+     if (!name || !date || !categoryId || !amount) {
+      errors.push({ message: '所有欄位都是必填。' })
+    }
+    if (errors.length) {
+      return Category.find({})
+      .lean()
+      .then(catagories => {
+        res.render('create-records', { 
+          catagories,
+          errors,
+          name,
+          date,
+          categoryId,
+          amount
+        })
+      })
+    }
      return Record.create({
           name, date, categoryId, amount, userId
           })
@@ -65,6 +87,7 @@ router.post('/create', (req, res) => {
           })      
 })
 
+//發送刪除請求
 router.delete('/delete/:id', (req, res) => {
      const userId = req.user._id
      const _id = req.params.id

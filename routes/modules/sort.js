@@ -3,9 +3,9 @@ const router = express.Router()
 const Record = require('../../models/record')
 
 
-router.post('/', (req, res) => {
+router.get('/:sort', (req, res) => {
     const userId = req.user._id
-    const sort = req.body.sort
+    const sort = req.params.sort
     
     Record.find({ userId })
       .populate('categoryId')
@@ -15,10 +15,8 @@ router.post('/', (req, res) => {
         const result = []
         if (sort === '全部') {
           records.forEach(record => {
-            totalAmount += record.amount
-            
-          })
-          
+            totalAmount += record.amount         
+          })      
           return res.render('index', { records, totalAmount, sort })
         } else {
           records.forEach(record  => {

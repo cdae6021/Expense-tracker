@@ -1,4 +1,5 @@
 <div class="container h-100" style="width: 600px;">
+  <div class="card card-body p-5">
   <form action="/records/edit/{{record._id}}?_method=PUT" method="post"
     class="h-100 d-flex flex-column justify-content-evenly">
     <h4 class="align-self-center">編輯</h4>
@@ -39,6 +40,7 @@
         <input type="number" name="amount" class="form-control" id="amount" min="0" value="{{record.amount}}">
       </div>
     </div>
-    <button type="submit" class="btn btn-outline-success w-75 text-center align-self-center mt-4">確認修改</button>
+    <button type="submit" class="btn btn-warning w-75 text-center align-self-center mt-4">確認修改</button>
   </form>
+  </div>
 </div>
