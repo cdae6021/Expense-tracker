@@ -8,5 +8,5 @@ home page
 user can sort the record
 ![003](https://user-images.githubusercontent.com/96229122/172317027-d60ef1a2-37a2-41a9-817f-e15efa18aa4c.png)
 ## Getting Start
--Node.js v14.16.0
--MongoDB v4.2.18
+- Node.js v14.16.0
+- MongoDB v4.2.18
